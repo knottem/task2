@@ -1,6 +1,8 @@
+import Window.Window;
+
 public class main {
     public static void main(String[] args) {
-        System.out.println("hej");
-        System.out.println("test");
+        Window window = new Window();
+        window.createAll();
     }
 }
