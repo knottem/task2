@@ -39,13 +39,13 @@ public class Tools {
                 Scanner scan = new Scanner(System.in);
                 answer = scan.nextLine();
 
-                if(answer.contains(" ")){
+                if(answer.trim().contains(" ")){
                     dataFirst = answer.split(" ");
                     answer2 = convertText(dataFirst[0]);
                     answer3 = convertText(dataFirst[1]);
                 }
                 else{
-                    answer2 = convertText(answer);
+                    answer2 = convertText(answer.trim());
                 }
 
             } catch (Exception e) {

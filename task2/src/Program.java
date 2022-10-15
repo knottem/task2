@@ -19,20 +19,16 @@ public class Program extends Tools{
 
         do {
             int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat");
-            switch(answer){
-                case(1):
-                    showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers);
-                    break;
-                case(2):
-                    break;
-                default:
-                    System.out.println("Felaktigt input");
+            switch (answer) {
+                case (1) -> showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers);
+                case (2) -> files.createFile(customers, filepath2);
+                default -> System.out.println("Felaktigt input");
             }
 
             repeat = repeatProgram("Kör igen?");
 
         }while(!repeat);
 
-        files.createFile(customers, filepath2);
+
     }
 }
