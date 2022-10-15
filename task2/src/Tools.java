@@ -80,6 +80,14 @@ public class Tools {
 
     }
 
+    public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, String testString){
+        System.out.println(text + "Svara med siffran 1-" + customers.size());
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println(i+1 +" "+ customers.get(i).getSurName() + " " + customers.get(i).getLastName());
+        }
+        return inputInt("");
+    }
+
     public int inputInt(String text){
         while(true) {
             Scanner scan = new Scanner(System.in);
@@ -95,5 +103,6 @@ public class Tools {
             }
         }
     }
+
 
 }

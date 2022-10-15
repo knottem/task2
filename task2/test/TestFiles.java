@@ -72,7 +72,8 @@ public class TestFiles {
                 Personnummer: 8701012345
                 Förnamn: George
                 Efternamn: McFly
-                Datum: 2000-07-01""";
+                Datum: 2000-07-01
+                Medlemskap: Nej""";
         assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
 
         tools.showCustomer("question",customerTest,true,"BELLA");

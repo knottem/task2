@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Files extends Tools{
@@ -12,6 +13,7 @@ public class Files extends Tools{
     String[] dataFirst;
     String[] name;
     long ssn;
+    LocalDate today = LocalDate.now();
 
     public void addCustomers(ArrayList<Customer> customers, String filepath){
             try {
@@ -25,11 +27,18 @@ public class Files extends Tools{
 
                     LocalDate localDate = LocalDate.parse(secondLine);
 
+
                     ssn = Long.parseLong(dataFirst[0]);
 
                     name = dataFirst[1].split(" ");
 
-                    customers.add(new Customer(ssn, name[0], name[1], localDate));
+                    if(localDate.isAfter(today.minusYears(1))){
+                        customers.add(new Customer(ssn, name[0], name[1], localDate, true));
+                    }
+                    else{
+                        customers.add(new Customer(ssn, name[0], name[1], localDate, false));
+                    }
+
                 }
 
             }catch (Exception e){
@@ -37,16 +46,16 @@ public class Files extends Tools{
             }
 
     }
-    public void createFile(ArrayList<Customer> customers, String filepath ){
+    public void createTrainingTime(ArrayList<Customer> customers, int position, String filepath ){
         FileWriter writer;
         try {
-            writer = new FileWriter(filepath, false);
-            for (Customer customer : customers) {
-                writer.write("Personnummer: " + customer.getSsn()
-                        + "\nFörnamn: " + customer.getSurName()
-                        + "\nEfternamn: " + customer.getLastName()
-                        + "\nDatum: " + customer.getDate() + "\n\n");
-            }
+            writer = new FileWriter(filepath, true);
+            writer.write("Personnummer: " + customers.get(position).getSsn()
+                        + "\nFörnamn: " + customers.get(position).getSurName()
+                        + "\nEfternamn: " + customers.get(position).getLastName()
+                        + "\nDatum för träning: " + today + "\n\n");
+            System.out.println("Träningstid för " + customers.get(position).getSurName() + " " + customers.get(position).getLastName() + " tillagd");
+
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
