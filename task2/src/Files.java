@@ -11,6 +11,7 @@ public class Files extends Tools{
     String secondLine;
     String[] dataFirst;
     String[] name;
+    long ssn;
 
     public void addCustomers(ArrayList<Customer> customers, String filepath){
             try {
@@ -24,11 +25,11 @@ public class Files extends Tools{
 
                     LocalDate localDate = LocalDate.parse(secondLine);
 
-                    long dataNum = Long.parseLong(dataFirst[0]);
+                    ssn = Long.parseLong(dataFirst[0]);
 
                     name = dataFirst[1].split(" ");
 
-                    customers.add(new Customer(dataNum,name[0],name[1],localDate));
+                    customers.add(new Customer(ssn, name[0], name[1], localDate));
                 }
 
             }catch (Exception e){
@@ -39,12 +40,12 @@ public class Files extends Tools{
     public void createFile(ArrayList<Customer> customers, String filepath ){
         FileWriter writer;
         try {
-            writer = new FileWriter(filepath, false);
+            writer = new FileWriter(filepath, true);
             for (Customer customer : customers) {
-                writer.write("Personnummer: " + customer.ssn
-                        + "\nFörnamn: " + customer.surName
-                        + "\nEfternamn: " + customer.lastName
-                        + "\nDatum: " + customer.date + "\n\n");
+                writer.write("Personnummer: " + customer.getSsn()
+                        + "\nFörnamn: " + customer.getSurName()
+                        + "\nEfternamn: " + customer.getLastName()
+                        + "\nDatum: " + customer.getDate() + "\n\n");
             }
             writer.close();
         } catch (IOException e) {
