@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public class Program extends Tools{
+public class Program extends Tools {
 
     ArrayList<Customer> customers = new ArrayList<>();
 
@@ -11,24 +11,31 @@ public class Program extends Tools{
 
     boolean repeat = false;
 
-    public void huvudProgram(){
+    public void huvudProgram() {
 
         files.addCustomers(customers, filepath);
 
         System.out.println("Välkommen till programmet");
 
         do {
-            int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat");
-            switch (answer) {
-                case (1) -> showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers);
-                case (2) -> files.createFile(customers, filepath2);
-                default -> System.out.println("Felaktigt input");
+            boolean startLoop = true;
+            while (startLoop) {
+                int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat");
+                switch (answer) {
+                    case (1) -> {
+                        showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers);
+                        startLoop = false;
+                    }
+                    case (2) -> {
+                        files.createFile(customers, filepath2);
+                        startLoop = false;
+                    }
+                    default -> System.out.println("Felaktigt input");
+                }
             }
-
             repeat = repeatProgram("Kör igen?");
-
-        }while(!repeat);
-
+        }
+        while (!repeat) ;
 
     }
 }
