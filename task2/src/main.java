@@ -1,8 +1,10 @@
 import Window.Window;
 
+import java.io.IOException;
+
 public class main {
-    public static void main(String[] args) {
-        Window window = new Window();
-        window.createAll();
+    public static void main(String[] args) throws IOException {
+        Program program = new Program();
+        program.Program();
     }
 }
