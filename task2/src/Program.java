@@ -15,7 +15,7 @@ public class Program extends Tools {
 
         files.addCustomers(customers, filepath);
 
-        System.out.println("Välkommen till programmet");
+        System.out.println("Välkommen till Gym-Programmet");
 
         do {
             boolean startLoop = true;

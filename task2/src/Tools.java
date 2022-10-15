@@ -69,7 +69,7 @@ public class Tools {
         for (Customer customer : customers) {
             String convert = convertText(customer.getSurName());
             String convert2 = convertText(customer.getLastName());
-            if (convert.equals(answer2) || convert2.equals(answer2)) {
+            if (convert.equals(answer2) || convert2.equals(answer2) || convert2.equals(answer3)) {
                 System.out.println(customer);
                 b = true;
             }

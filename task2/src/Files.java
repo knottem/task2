@@ -25,18 +25,18 @@ public class Files extends Tools{
 
                     secondLine = scanner.nextLine();
 
-                    LocalDate localDate = LocalDate.parse(secondLine);
+                    LocalDate lastPayment = LocalDate.parse(secondLine);
 
 
                     ssn = Long.parseLong(dataFirst[0]);
 
                     name = dataFirst[1].split(" ");
 
-                    if(localDate.isAfter(today.minusYears(1))){
-                        customers.add(new Customer(ssn, name[0], name[1], localDate, true));
+                    if(lastPayment.isAfter(today.minusYears(1))){
+                        customers.add(new Customer(ssn, name[0], name[1], lastPayment, true));
                     }
                     else{
-                        customers.add(new Customer(ssn, name[0], name[1], localDate, false));
+                        customers.add(new Customer(ssn, name[0], name[1], lastPayment, false));
                     }
 
                 }
