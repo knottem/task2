@@ -40,7 +40,7 @@ public class Files extends Tools{
     public void createFile(ArrayList<Customer> customers, String filepath ){
         FileWriter writer;
         try {
-            writer = new FileWriter(filepath, true);
+            writer = new FileWriter(filepath, false);
             for (Customer customer : customers) {
                 writer.write("Personnummer: " + customer.getSsn()
                         + "\nFörnamn: " + customer.getSurName()
