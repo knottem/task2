@@ -28,7 +28,7 @@ public class Program extends Tools {
                     }
                     case (2) -> {
                         int i = files.listAllCustomers("Vilken kund vill du lägga till träningstid?", customers, false, "");
-                        files.createTrainingTime(customers, i-1, filepath2);
+                        files.createTrainingTime(customers, i, filepath2);
                         startLoop = false;
                     }
                     default -> System.out.println("Felaktigt input");
