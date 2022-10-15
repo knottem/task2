@@ -14,11 +14,18 @@ public class Tools {
         return text1.replaceAll("\\s", "");
     }
 
-    public boolean repeatProgram(String text) {
+    public boolean repeatProgram(String text,boolean test, String testString) {
         boolean repeat;
         do {
             System.out.println(text +" j/n");
-            Scanner input = new Scanner(System.in);
+            Scanner input;
+            if(!test) {
+                input = new Scanner(System.in);
+            }
+            else{
+                input = new Scanner(testString);
+            }
+
             String yesNo = input.nextLine();
             repeat = true;
             switch (yesNo) {
@@ -32,11 +39,17 @@ public class Tools {
         } while (repeat);
         return false;
     }
-    public void showCustomer(String text, ArrayList<Customer> customers){
+    public void showCustomer(String text, ArrayList<Customer> customers, boolean test, String testString){
 
             System.out.println(text);
+            Scanner scan;
             try {
-                Scanner scan = new Scanner(System.in);
+                if(!test) {
+                    scan = new Scanner(System.in);
+                }
+                else{
+                    scan = new Scanner(testString);
+                }
                 answer = scan.nextLine();
 
                 if(answer.trim().contains(" ")){
@@ -54,9 +67,9 @@ public class Tools {
 
             boolean b = false;
         for (Customer customer : customers) {
-            String test = convertText(customer.getSurName());
-            String test2 = convertText(customer.getLastName());
-            if (test.equals(answer2) || test2.equals(answer2)) {
+            String convert = convertText(customer.getSurName());
+            String convert2 = convertText(customer.getLastName());
+            if (convert.equals(answer2) || convert2.equals(answer2)) {
                 System.out.println(customer);
                 b = true;
             }

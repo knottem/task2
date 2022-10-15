@@ -23,7 +23,7 @@ public class Program extends Tools {
                 int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat");
                 switch (answer) {
                     case (1) -> {
-                        showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers);
+                        showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers, false,"");
                         startLoop = false;
                     }
                     case (2) -> {
@@ -33,7 +33,7 @@ public class Program extends Tools {
                     default -> System.out.println("Felaktigt input");
                 }
             }
-            repeat = repeatProgram("Kör igen?");
+            repeat = repeatProgram("Kör igen?",false,"");
         }
         while (!repeat) ;
 

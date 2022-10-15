@@ -16,7 +16,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Personnummer: " + ssn + "" +
+        return "Personnummer: " + ssn +
                 "\nFörnamn: " + surName +
                 "\nEfternamn: " + lastName +
                 "\nDatum: " + date +
