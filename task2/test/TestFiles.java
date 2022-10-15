@@ -67,12 +67,18 @@ public class TestFiles {
         files.addCustomers(customerTest, testFilePath);
         setUpStreams();
         tools.showCustomer("question",customerTest,true,"George");
-        assertTrue(outContent.toString().contains("Förnamn: George"));
-        assertTrue(outContent.toString().contains("Efternamn: McFly"));
-        assertFalse(outContent.toString().contains("Förnamn: Bella"));
+        String expectedOutput = """
+                question
+                Personnummer: 8701012345
+                Förnamn: George
+                Efternamn: McFly
+                Datum: 2000-07-01""";
+        assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
+
         tools.showCustomer("question",customerTest,true,"BELLA");
         assertTrue(outContent.toString().contains("Förnamn: Bella"));
         assertTrue(outContent.toString().contains("Datum: 2019-12-02"));
+
         restoreStreams();
     }
 
