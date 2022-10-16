@@ -11,7 +11,8 @@ import static org.testng.Assert.*;
 
 public class TestFiles {
 
-    String testFilePath = "task2/src/customersTest.txt";
+    String testFilePath = "task2/test/customersTest.txt";
+    String testTrainingpath = "Task2/test/customerTrainingTest.txt";
     Files files = new Files();
     Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
@@ -44,6 +45,11 @@ public class TestFiles {
 
         assertEquals(customerTest.get(2).getDate(), LocalDate.of(2016,3,12));
         assertNotEquals(customerTest.get(2).getDate(), "2006-03-12");
+
+    }
+    @Test
+    public void createTrainingTime(){
+
 
     }
     @Test
