@@ -18,18 +18,17 @@ public class Files {
             try {
                 Scanner scanner = new Scanner(new File(filepath));
                 while (scanner.hasNext()) {
+
                     firstLine = scanner.nextLine();
 
                     dataFirst = firstLine.split(", ");
+                    ssn = Long.parseLong(dataFirst[0]);
+
+                    name = dataFirst[1].split(" ");
 
                     secondLine = scanner.nextLine();
 
                     LocalDate lastPayment = LocalDate.parse(secondLine);
-
-
-                    ssn = Long.parseLong(dataFirst[0]);
-
-                    name = dataFirst[1].split(" ");
 
                     if(lastPayment.isAfter(today.minusYears(1))){
                         customers.add(new Customer(ssn, name[0], name[1], lastPayment, true));
