@@ -3,10 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class Files extends Tools{
+public class Files {
 
     String firstLine;
     String secondLine;
@@ -62,4 +61,18 @@ public class Files extends Tools{
         }
 
     }
+    public void addCustomerToFile(ArrayList<Customer> customers, String filepath){
+        FileWriter writer;
+        int position = customers.size()-1;
+        try {
+            writer = new FileWriter(filepath, true);
+            writer.write("\n" + customers.get(position).getSsn() +", "+ customers.get(position).getSurName() + " "
+                    + customers.get(position).getLastName() + "\n"+ today);
+            System.out.println("Kunden " + customers.get(position).getSurName() + " " + customers.get(position).getLastName() + " tillagd.");
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -16,7 +16,7 @@ public class Customer {
         this.payingCustomer = payingCustomer;
     }
 
-    public String printPayingCustomer(boolean payingCustomer){
+    private String printPayingCustomer(boolean payingCustomer){
         String paying;
         if(payingCustomer){
             paying = " Ja";
@@ -27,9 +27,14 @@ public class Customer {
         return paying;
     }
 
+    private String printSsn(long ssn){
+        String a = String.valueOf(ssn);
+        return new StringBuilder(a).insert(a.length()-4, "-").toString();
+    }
+
     @Override
     public String toString() {
-        return "Personnummer: " + ssn +
+        return "Personnummer: " + printSsn(ssn) +
                 "\nFörnamn: " + surName +
                 "\nEfternamn: " + lastName +
                 "\nDatum: " + date +

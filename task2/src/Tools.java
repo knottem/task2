@@ -1,13 +1,13 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class Tools {
+public class Tools extends Files{
 
-    String[] dataFirst;
-    String answer;
-    String answer2;
-    String answer3;
+    LocalDate today = LocalDate.now();
+    String filepath = "task2/src/customers.txt";
 
     public String convertText(String text){
         String text1 = text.toLowerCase();
@@ -40,6 +40,12 @@ public class Tools {
         return false;
     }
     public void showCustomer(String text, ArrayList<Customer> customers, boolean test, String testString){
+            String[] dataFirst;
+            String answer;
+            String answer2 = null;
+            String answer3 = null;
+            long answer4 = 0;
+            long answer5 = 0;
 
             System.out.println(text);
             Scanner scan;
@@ -50,15 +56,26 @@ public class Tools {
                 else{
                     scan = new Scanner(testString);
                 }
-                answer = scan.nextLine();
-
-                if(answer.trim().contains(" ")){
-                    dataFirst = answer.split(" ");
-                    answer2 = convertText(dataFirst[0]);
-                    answer3 = convertText(dataFirst[1]);
+                if (scan.hasNextLong()) {
+                    answer4 = scan.nextLong();
                 }
-                else{
-                    answer2 = convertText(answer.trim());
+                else if(scan.hasNextLine()) {
+
+                    answer = scan.nextLine();
+
+                    if (answer.trim().contains(" ")) {
+                        dataFirst = answer.split(" ");
+                        answer2 = convertText(dataFirst[0]);
+                        answer3 = convertText(dataFirst[1]);
+                    } else if (answer.trim().contains("-")) {
+                        try {
+                            answer5 = Long.parseLong(answer.replaceAll("-", ""));
+                        } catch(NumberFormatException e){
+                            answer2 = answer.replaceAll("-", "");
+                        }
+                    } else {
+                        answer2 = convertText(answer.trim());
+                    }
                 }
 
             } catch (Exception e) {
@@ -69,7 +86,8 @@ public class Tools {
         for (Customer customer : customers) {
             String convert = convertText(customer.getSurName());
             String convert2 = convertText(customer.getLastName());
-            if (convert.equals(answer2) || convert2.equals(answer2) || convert2.equals(answer3)) {
+            if (convert.equals(answer2) || convert2.equals(answer2) || convert2.equals(answer3)
+                    || answer4 == customer.getSsn() || answer5 == customer.getSsn()) {
                 System.out.println(customer);
                 b = true;
             }
@@ -86,6 +104,68 @@ public class Tools {
             System.out.println(i+1 +". "+ customers.get(i).getSurName() + " " + customers.get(i).getLastName());
         }
         return inputInt("")-1;
+    }
+
+    public void createNewCustomer(String text,ArrayList<Customer> customers, boolean test, String testString) {
+        String answer, surName,lastName,surNameCap = null,lastNameCap = null, yesNo, testLength;
+        long answer2 = 0;
+        String[] dataFirst;
+
+        System.out.println(text);
+        Scanner scan;
+        try {
+
+            if (!test) {
+                scan = new Scanner(System.in);
+            } else {
+                scan = new Scanner(testString);
+            }
+
+            System.out.println("Namn?");
+            answer = scan.nextLine();
+
+            if (answer.trim().contains(" ")) {
+                dataFirst = answer.split(" ");
+                surName = convertText(dataFirst[0]);
+                surNameCap = surName.substring(0,1).toUpperCase() + surName.substring(1);
+                lastName = convertText(dataFirst[1]);
+                lastNameCap = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+            }
+
+
+
+            boolean b = true;
+            while(b) {
+                System.out.println("Personnummer?");
+                testLength = scan.nextLine();
+                if (testLength.length() == 10) {
+                    answer2 = Long.parseLong(testLength);
+                    b = false;
+                } else {
+                    System.out.println(testLength + " är inte 10 siffror långt");
+                }
+            }
+
+
+            System.out.println("Personnummer: "+ answer2 + "\nFörnamn: " + surNameCap
+                    + "\nEfternamn: " + lastNameCap + "\nDagens Datum: " + today);
+
+            System.out.println("\nStämmer detta och vill du lägga till kunde? j/n");
+
+            yesNo = scan.nextLine();
+
+            if(Objects.equals(yesNo, "j")) {
+                customers.add(new Customer(answer2, surNameCap, lastNameCap, today, true));
+                addCustomerToFile(customers,filepath);
+            }
+            else{
+                System.out.println("Ok, kunden las ej till");
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public int inputInt(String text){
