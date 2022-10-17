@@ -27,13 +27,32 @@ public class TestFiles {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
-
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
 
+    @Test
+    public void searchustomerTest(){
+        files.addCustomers(customerTest, testFilePath);
+        setUpStreams();
+        tools.searchCustomer("question",customerTest,true,"George");
+        String expectedOutput = """
+                question
+                Personnummer: 870101-2345
+                Förnamn: George
+                Efternamn: McFly
+                Datum: 2000-07-01
+                Medlemskap: Nej""";
+        assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
+
+        tools.searchCustomer("question",customerTest,true,"BELLA");
+        assertTrue(outContent.toString().contains("Förnamn: Bella"));
+        assertTrue(outContent.toString().contains("Datum: 2019-12-02"));
+        restoreStreams();
+
+    }
 
     @Test
     public void addCustomersTest(){
@@ -67,27 +86,5 @@ public class TestFiles {
         assertFalse(repeat);
 
     }
-
-    @Test
-    public void showCustomerTest(){
-        files.addCustomers(customerTest, testFilePath);
-        setUpStreams();
-        tools.showCustomer("question",customerTest,true,"George");
-        String expectedOutput = """
-                question
-                Personnummer: 8701012345
-                Förnamn: George
-                Efternamn: McFly
-                Datum: 2000-07-01
-                Medlemskap: Nej""";
-        assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
-
-        tools.showCustomer("question",customerTest,true,"BELLA");
-        assertTrue(outContent.toString().contains("Förnamn: Bella"));
-        assertTrue(outContent.toString().contains("Datum: 2019-12-02"));
-
-        restoreStreams();
-    }
-
 
 }

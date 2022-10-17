@@ -39,7 +39,7 @@ public class Tools extends Files{
         } while (repeat);
         return false;
     }
-    public void showCustomer(String text, ArrayList<Customer> customers, boolean test, String testString){
+    public void searchCustomer(String text, ArrayList<Customer> customers, boolean test, String testString){
             String[] dataFirst;
             String answer;
             String answer2 = null;

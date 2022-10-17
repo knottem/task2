@@ -25,7 +25,7 @@ public class Program extends Tools {
                 int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat\n3. Lägg till ny betalande kund\n4. Avsluta Programmet");
                 switch (answer) {
                     case (1) -> {
-                        showCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers, false,"");
+                        searchCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers, false,"");
                         startLoop = false;
                     }
                     case (2) -> {
