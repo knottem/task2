@@ -22,7 +22,7 @@ public class Program extends Tools {
         do {
             boolean startLoop = true;
             while (startLoop) {
-                int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat\n3. Lägg till ny betalande kund\n4. Avsluta Programmet");
+                int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat\n3. Lägg till ny betalande kund\n4. Avsluta Programmet", false,"");
                 switch (answer) {
                     case (1) -> {
                         searchCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers, false,"");

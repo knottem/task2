@@ -17,12 +17,13 @@ public class TestTools {
     Files files = new Files();
     Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
-    LocalDate testDate = LocalDate.of(2022,10,18);
+    LocalDate testDate = LocalDate.of(2022,10,20);
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
+
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -46,8 +47,8 @@ public class TestTools {
     public void checkIfMembershipTest(){
         LocalDate date1 = LocalDate.of(2020,10,18);
         LocalDate date2 = LocalDate.of(2021,11,18);
-        customerTest.add(new Customer(1234567890,"George", "Booth",date1,false));
-        customerTest.add(new Customer(1234567890,"Mika", "Dante",date2,false));
+        customerTest.add(new Customer(8701012345L,"George", "Booth",date1,false));
+        customerTest.add(new Customer(1234567890L,"Mika", "Dante",date2,false));
         tools.checkIfMembership(customerTest,true,testDate);
 
         assertFalse(customerTest.get(0).isPayingCustomer());
@@ -55,21 +56,23 @@ public class TestTools {
     }
     @Test
     public void searchCustomerTest(){
-        files.addCustomers(customerTest, testFilePath);
+        LocalDate date1 = LocalDate.of(2000,7,1);
+        LocalDate date2 = LocalDate.of(2021,11,18);
+        customerTest.add(new Customer(8701012345L,"George", "McFly",date1, false));
+        customerTest.add(new Customer(1234567890L, "Bella", "Boll", date2, true));
         setUpStreams();
-        tools.searchCustomer("question",customerTest,true,"George");
+        tools.searchCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)",customerTest,true,"George");
         String expectedOutput = """
-                question
+                Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)
                 Personnummer: 870101-2345
                 Förnamn: George
                 Efternamn: McFly
                 Datum: 2000-07-01
                 Medlemskap: Nej""";
         assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
-
         tools.searchCustomer("question",customerTest,true,"BELLA");
         assertTrue(outContent.toString().contains("Förnamn: Bella"));
-        assertTrue(outContent.toString().contains("Datum: 2021-12-02"));
+        assertTrue(outContent.toString().contains("Datum: 2021-11-18"));
         restoreStreams();
 
     }
@@ -83,9 +86,12 @@ public class TestTools {
 
     @Test
     public void listAllCustomersTest(){
+        //Skall alltid returna index platsen på arrayListen, så returnar -1 av det man valde.
         files.addCustomers(customerTest, testFilePath);
         int i = tools.listAllCustomers("test", customerTest, true, 1);
-        assertEquals(i,1);
+        int j = tools.listAllCustomers("test", customerTest, true, 3);
+        assertEquals(i,0);
+        assertEquals(j,2);
 
     }
     @Test
@@ -98,5 +104,11 @@ public class TestTools {
         assertEquals(customerTest.get(customerTest.size()-1).getLastName(), "Test");
         assertEquals(customerTest.get(customerTest.size()-1).getSsn(), 1234567890);
         assertEquals(customerTest.get(customerTest.size()-1).getDate(), LocalDate.now());
+    }
+    @Test
+    public void inputIntTest(){
+        assertEquals(tools.inputInt("",true,"1"), 1);
+        assertNotEquals(tools.inputInt("",true,"one"), 1);
+        assertEquals(tools.inputInt("",true,"20"), 20);
     }
 }

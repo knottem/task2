@@ -115,15 +115,16 @@ public class Tools extends Files {
     }
 
     public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
-        System.out.println(text + " Svara med siffran 1-" + customers.size());
-        for (int i = 0; i < customers.size(); i++) {
-            System.out.println(i+1 +". "+ customers.get(i).getSurName() + " " + customers.get(i).getLastName());
-        }
         if(!test) {
-            return inputInt("") - 1;
+            System.out.println(text + " Svara med siffran 1-" + customers.size());
+            for (int i = 0; i < customers.size(); i++) {
+                System.out.println(i + 1 + ". " + customers.get(i).getSurName() + " " + customers.get(i).getLastName());
+            }
+            return inputInt("",false,"") - 1;
         }
+
         else{
-            return testInt;
+            return testInt - 1;
         }
     }
 
@@ -190,20 +191,40 @@ public class Tools extends Files {
 
     }
 
-    public int inputInt(String text){
+    public int inputInt(String text, boolean test, String testValue){
+
         while(true) {
-            Scanner scan = new Scanner(System.in);
-            try {
-                System.out.println(text);
+            Scanner scan = null;
+            System.out.println(text);
+            try{
+            if(!test){
+                scan = new Scanner(System.in);
                 return scan.nextInt();
+            }
+            else{
+                scan = new Scanner(testValue);
+                return Integer.parseInt(testValue);
+            }
+
             } catch (InputMismatchException e) {
-                System.out.println("Wrong Type");
-                scan.next();
+                if(!test) {
+                    System.out.println("Wrong Type");
+                    scan.next();
+                }
+                else{
+                    break;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Expected a number");
-                scan.next();
+                if(!test) {
+                    System.out.println("Expected a number");
+                    scan.next();
+                }
+                else{
+                    break;
+                }
             }
         }
+        return 0;
     }
 
 
