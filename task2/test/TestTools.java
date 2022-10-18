@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTools {
     String testFilePath = "task2/test/customersTest.txt";
-    String testTrainingpath = "Task2/test/customerTrainingTest.txt";
     Files files = new Files();
     Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
@@ -93,7 +92,7 @@ public class TestTools {
     public void createNewCustomerTest(){
         files.addCustomers(customerTest, testFilePath);
         String test = "Erik Test\n1234567890";
-        tools.createNewCustomer("test",customerTest,true,test);
+        tools.createNewCustomer("test",customerTest,testFilePath,true,test);
 
         assertEquals(customerTest.get(customerTest.size()-1).getSurName(), "Erik");
         assertEquals(customerTest.get(customerTest.size()-1).getLastName(), "Test");

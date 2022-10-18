@@ -34,7 +34,7 @@ public class Program extends Tools {
                         startLoop = false;
                     }
                     case(3) -> {
-                        createNewCustomer("Skapa ny medlem.", customers,false,"");
+                        createNewCustomer("Skapa ny medlem.", customers,filepath,false,"");
                         startLoop = false;
                     }
                     case(4) -> System.exit(0);

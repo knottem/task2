@@ -43,7 +43,7 @@ public class Files {
             }
 
     }
-    public void createTrainingTime(ArrayList<Customer> customers, int position, String filepath ){
+    public void createTrainingTime(ArrayList<Customer> customers, int position, String filepath){
 
         try (FileWriter writer = new FileWriter(filepath, true)){
             writer.write("Personnummer: " + customers.get(position).getSsn()
@@ -55,6 +55,7 @@ public class Files {
             System.out.println("Träningstid för " + customers.get(position).getSurName()
                         + " " + customers.get(position).getLastName()
                         + " tillagd\nDatum: " + today + " Tid: " + now);
+            writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

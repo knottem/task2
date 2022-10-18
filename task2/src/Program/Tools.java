@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Tools extends Files {
 
     LocalDate today = LocalDate.now();
-    String filepath = "task2/src/customers.txt";
 
     public String convertText(String text){
         String text1 = text.toLowerCase();
@@ -128,7 +127,7 @@ public class Tools extends Files {
         }
     }
 
-    public void createNewCustomer(String text,ArrayList<Customer> customers, boolean test, String testString) {
+    public void createNewCustomer(String text,ArrayList<Customer> customers, String filepath, boolean test, String testString) {
         String answer, surName,lastName,surNameCap = null,lastNameCap = null, yesNo = null, testLength;
         long answer2 = 0;
         String[] dataFirst;
@@ -177,7 +176,9 @@ public class Tools extends Files {
 
             if(Objects.equals(yesNo, "j") || test) {
                 customers.add(new Customer(answer2, surNameCap, lastNameCap, today, true));
-                addCustomerToFile(customers,filepath);
+                if(!test) {
+                    addCustomerToFile(customers, filepath);
+                }
             }
             else{
                 System.out.println("Ok, kunden las ej till");
