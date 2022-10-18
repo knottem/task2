@@ -26,35 +26,11 @@ public class Tools extends Files {
         }
         for (Customer customer : customers) {
             if (customer.getDate().isAfter(date1.minusYears(1))) {
-                customer.payingCustomer = true;
+                customer.setPayingCustomer();
             }
         }
     }
-    public boolean repeatProgram(String text,boolean test, String testString) {
-        boolean repeat;
-        do {
-            System.out.println(text +" j/n");
-            Scanner input;
-            if(!test) {
-                input = new Scanner(System.in);
-            }
-            else{
-                input = new Scanner(testString);
-            }
 
-            String yesNo = input.nextLine();
-            repeat = true;
-            switch (yesNo) {
-                case "j" -> repeat = false;
-                case "n" -> {
-                    System.out.println("Hej då");
-                    System.exit(0);
-                }
-                default -> System.out.println("Svara med j för JA och n för NEJ");
-            }
-        } while (repeat);
-        return false;
-    }
     public void searchCustomer(String text, ArrayList<Customer> customers, boolean test, String testString){
             String[] dataFirst;
             String answer;
@@ -113,7 +89,36 @@ public class Tools extends Files {
             }
 
     }
+    public boolean repeatProgram(String text,boolean test, String testString) {
+        boolean repeat;
+        do {
+            System.out.println(text +" j/n");
+            Scanner input;
+            if(!test) {
+                input = new Scanner(System.in);
+            }
+            else{
+                input = new Scanner(testString);
+            }
 
+            String yesNo = input.nextLine();
+            repeat = true;
+            switch (yesNo) {
+                case "j" -> repeat = false;
+                case "n" -> {
+                    if(!test){
+                        System.out.println("Hej då");
+                        System.exit(0);
+                    }
+                    else{
+                        repeat = false;
+                    }
+                }
+                default -> System.out.println("Svara med j för JA och n för NEJ");
+            }
+        } while (repeat);
+        return false;
+    }
     public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
         if(!test) {
             System.out.println(text + " Svara med siffran 1-" + customers.size());
@@ -176,7 +181,7 @@ public class Tools extends Files {
             }
 
             if(Objects.equals(yesNo, "j") || test) {
-                customers.add(new Customer(answer2, surNameCap, lastNameCap, today, true));
+                customers.add(new Customer(answer2, surNameCap, lastNameCap, today));
                 if(!test) {
                     addCustomerToFile(customers, filepath);
                 }
@@ -209,7 +214,9 @@ public class Tools extends Files {
             } catch (InputMismatchException e) {
                 if(!test) {
                     System.out.println("Wrong Type");
-                    scan.next();
+                    if (scan != null) {
+                        scan.next();
+                    }
                 }
                 else{
                     break;
@@ -217,7 +224,10 @@ public class Tools extends Files {
             } catch (NumberFormatException e) {
                 if(!test) {
                     System.out.println("Expected a number");
-                    scan.next();
+                    if(scan != null){
+                       scan.next();
+                    }
+
                 }
                 else{
                     break;

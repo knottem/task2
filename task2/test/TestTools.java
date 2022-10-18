@@ -47,8 +47,8 @@ public class TestTools {
     public void checkIfMembershipTest(){
         LocalDate date1 = LocalDate.of(2020,10,18);
         LocalDate date2 = LocalDate.of(2021,11,18);
-        customerTest.add(new Customer(8701012345L,"George", "Booth",date1,false));
-        customerTest.add(new Customer(1234567890L,"Mika", "Dante",date2,false));
+        customerTest.add(new Customer(8701012345L,"George", "Booth",date1));
+        customerTest.add(new Customer(1234567890L,"Mika", "Dante",date2));
         tools.checkIfMembership(customerTest,true,testDate);
 
         assertFalse(customerTest.get(0).isPayingCustomer());
@@ -58,8 +58,7 @@ public class TestTools {
     public void searchCustomerTest(){
         LocalDate date1 = LocalDate.of(2000,7,1);
         LocalDate date2 = LocalDate.of(2021,11,18);
-        customerTest.add(new Customer(8701012345L,"George", "McFly",date1, false));
-        customerTest.add(new Customer(1234567890L, "Bella", "Boll", date2, true));
+        customerTest.add(new Customer(8701012345L,"George", "McFly",date1));
         setUpStreams();
         tools.searchCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)",customerTest,true,"George");
         String expectedOutput = """
@@ -70,7 +69,9 @@ public class TestTools {
                 Datum: 2000-07-01
                 Medlemskap: Nej""";
         assertEquals(outContent.toString().trim().replace("\r",""),expectedOutput);
-        tools.searchCustomer("question",customerTest,true,"BELLA");
+
+        customerTest.add(new Customer(1234567890L, "Bella", "Boll", date2));
+        tools.searchCustomer("question",customerTest,true,"BeLLA boLL");
         assertTrue(outContent.toString().contains("Förnamn: Bella"));
         assertTrue(outContent.toString().contains("Datum: 2021-11-18"));
         restoreStreams();
@@ -79,8 +80,12 @@ public class TestTools {
     @Test
     public void repeatProgramTest(){
         //Vill att repeat blir false för man svarade JA med j, så hela programmet körs om.
-        boolean repeat = tools.repeatProgram("Rerun", true,"j");
+        boolean repeat = tools.repeatProgram("Test Rerun", true,"j");
         assert(!repeat);
+        //repeat2 borde också bli false, då jag har istället för system.exit repeat false i test.
+        boolean repeat2 = tools.repeatProgram("Test Rerun", true,"n");
+        assert(!repeat2);
+
 
     }
 
@@ -111,4 +116,5 @@ public class TestTools {
         assertNotEquals(tools.inputInt("",true,"one"), 1);
         assertEquals(tools.inputInt("",true,"20"), 20);
     }
+
 }

@@ -1,5 +1,6 @@
 import Program.Customer;
 import Program.Files;
+import Program.Tools;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -15,7 +16,10 @@ public class TestFiles {
     String testFilePath = "task2/test/customersTest.txt";
     String testTrainingpath = "Task2/test/customerTrainingTest.txt";
     Files files = new Files();
+    Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
+    ArrayList<Customer> customerTest2 = new ArrayList<>();
+    LocalDate testDate = LocalDate.of(2021, 11, 18);
 
     @Test
     public void addCustomersTest(){
@@ -31,9 +35,8 @@ public class TestFiles {
     }
     @Test
     public void createTrainingTimeTest() {
-        LocalDate date1 = LocalDate.of(2021, 11, 18);
-        customerTest.add(new Customer(1234567890, "George", "Booth", date1, true));
-        customerTest.add(new Customer(8205011234L, "Martin", "Arg", date1, true));
+        customerTest.add(new Customer(1234567890, "George", "Booth", testDate));
+        customerTest.add(new Customer(8205011234L, "Martin", "Arg", testDate));
         files.createTrainingTime(customerTest, 0, testTrainingpath);
 
         String[] test = new String[5];
@@ -50,4 +53,18 @@ public class TestFiles {
         assertEquals("Datum för träning: " + LocalDate.now(), test[3]);
         assertEquals("Tid för träning: " + LocalTime.now().withNano(0), test[4]);
     }
+    @Test
+    public void addCustomerToFileTest(){
+        customerTest.add(new Customer(1234567890, "George", "Booth", LocalDate.now()));
+        files.addCustomerToFile(customerTest, testFilePath);
+
+        files.addCustomers(customerTest2, testFilePath);
+        tools.checkIfMembership(customerTest2,true,testDate);
+        assertEquals(customerTest2.get(customerTest2.size()-1).getSurName(), "George");
+        assertEquals(customerTest2.get(customerTest2.size()-1).getLastName(), "Booth");
+        assertEquals(customerTest2.get(customerTest2.size()-1).getDate(), LocalDate.now());
+        assertTrue(customerTest2.get(customerTest2.size()-1).isPayingCustomer());
+
+    }
+
 }

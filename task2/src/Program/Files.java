@@ -1,6 +1,7 @@
 package Program;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -35,10 +36,12 @@ public class Files {
 
                     LocalDate lastPayment = LocalDate.parse(secondLine);
 
-                    customers.add(new Customer(ssn, name[0], name[1], lastPayment, false));
+                    customers.add(new Customer(ssn, name[0], name[1], lastPayment));
 
                 }
-            }catch (Exception e){
+                //Fångar upp fel ifall filen skulle vara borttagen, inte ha fullständigt för arrays
+                // eller om den förväntar sig siffror men får något annat
+            }catch (FileNotFoundException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 e.printStackTrace();
             }
 

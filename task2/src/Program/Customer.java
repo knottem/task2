@@ -10,12 +10,11 @@ public class Customer {
     protected LocalDate date;
     protected boolean payingCustomer;
 
-    public Customer(long ssn, String surName, String lastName, LocalDate date, boolean payingCustomer) {
+    public Customer(long ssn, String surName, String lastName, LocalDate date) {
         this.ssn = ssn;
         this.surName = surName;
         this.lastName = lastName;
         this.date = date;
-        this.payingCustomer = payingCustomer;
     }
 
     private String printPayingCustomer(boolean payingCustomer){
@@ -48,6 +47,10 @@ public class Customer {
 
     public String getSurName() {
         return surName;
+    }
+
+    public void setPayingCustomer() {
+        payingCustomer = true;
     }
 
     public String getLastName() {
