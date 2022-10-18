@@ -1,3 +1,6 @@
+import Program.Customer;
+import Program.Files;
+import Program.Tools;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,7 @@ public class TestFiles {
     Files files = new Files();
     Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
+    LocalDate testDate = LocalDate.of(2022,10,18);
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
