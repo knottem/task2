@@ -14,6 +14,21 @@ public class Tools extends Files{
         return text1.replaceAll("\\s", "");
     }
 
+
+    public void checkIfMembership(ArrayList<Customer> customers, boolean test, LocalDate date){
+        LocalDate date1;
+        if(test){
+            date1 = date;
+        }
+        else {
+            date1 = today;
+        }
+        for (Customer customer : customers) {
+            if (customer.getDate().isAfter(date1.minusYears(1))) {
+                customer.payingCustomer = true;
+            }
+        }
+    }
     public boolean repeatProgram(String text,boolean test, String testString) {
         boolean repeat;
         do {

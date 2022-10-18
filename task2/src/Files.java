@@ -33,12 +33,8 @@ public class Files {
 
                     LocalDate lastPayment = LocalDate.parse(secondLine);
 
-                    if(lastPayment.isAfter(today.minusYears(1))){
-                        customers.add(new Customer(ssn, name[0], name[1], lastPayment, true));
-                    }
-                    else{
-                        customers.add(new Customer(ssn, name[0], name[1], lastPayment, false));
-                    }
+                    customers.add(new Customer(ssn, name[0], name[1], lastPayment, false));
+
                 }
             }catch (Exception e){
                 e.printStackTrace();

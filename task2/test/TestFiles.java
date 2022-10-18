@@ -1,13 +1,13 @@
 import org.junit.After;
 import org.junit.Before;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.testng.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestFiles {
 
@@ -34,7 +34,7 @@ public class TestFiles {
     }
 
     @Test
-    public void searchustomerTest(){
+    public void searchCustomerTest(){
         files.addCustomers(customerTest, testFilePath);
         setUpStreams();
         tools.searchCustomer("question",customerTest,true,"George");
@@ -71,14 +71,7 @@ public class TestFiles {
 
 
     }
-    @Test
-    public void convertTextTest(){
-        String test = "       GeOrGe    ";
-        String test2 = tools.convertText(test);
-        assertEquals(test2, "george");
-        assertNotEquals(test2, "       GeOrGe    ");
 
-    }
     @Test
     public void repeatProgramTest(){
         boolean repeat;
