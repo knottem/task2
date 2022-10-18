@@ -30,7 +30,7 @@ public class TestFiles {
         assertEquals(customerTest.get(1).getLastName(), "Boll");
 
         assertEquals(customerTest.get(2).getDate(), LocalDate.of(2016,3,12));
-        assertNotEquals(customerTest.get(2).getDate(), "2006-03-12");
+        assertNotEquals(customerTest.get(2).getDate(), LocalDate.of(2006,3,12));
 
     }
     @Test

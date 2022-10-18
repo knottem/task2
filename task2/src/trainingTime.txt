@@ -1,6 +1,12 @@
+Personnummer: 7512166544
+Förnamn: Greger
+Efternamn: Ganache
+Datum för träning: 2022-10-18
+Tid för träning: 22:44:01
+
 Personnummer: 7605021234
 Förnamn: Elmer
 Efternamn: Ekorrsson
 Datum för träning: 2022-10-18
-Tid för träning: 22:20:06
+Tid för träning: 22:44:01
 
