@@ -6,11 +6,9 @@ import java.util.ArrayList;
 public class Program extends Tools {
 
     ArrayList<Customer> customers = new ArrayList<>();
-
     String filepath = "task2/src/customers.txt";
     String filepath2 = "task2/src/trainingTime.txt";
     LocalDate today = LocalDate.now();
-
     boolean repeat = false;
 
     public void huvudProgram() {
@@ -31,7 +29,7 @@ public class Program extends Tools {
                         startLoop = false;
                     }
                     case (2) -> {
-                        int i = listAllCustomers("Vilken kund vill du lägga till träningstid?", customers, false, "");
+                        int i = listAllCustomers("Vilken kund vill du lägga till träningstid?", customers, false, 0);
                         createTrainingTime(customers, i, filepath2);
                         startLoop = false;
                     }

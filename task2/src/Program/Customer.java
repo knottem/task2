@@ -58,4 +58,7 @@ public class Customer {
         return date;
     }
 
+    public boolean isPayingCustomer() {
+        return payingCustomer;
+    }
 }

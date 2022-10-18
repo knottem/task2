@@ -17,7 +17,6 @@ public class Tools extends Files {
         return text1.replaceAll("\\s", "");
     }
 
-
     public void checkIfMembership(ArrayList<Customer> customers, boolean test, LocalDate date){
         LocalDate date1;
         if(test){
@@ -116,16 +115,21 @@ public class Tools extends Files {
 
     }
 
-    public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, String testString){
+    public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
         System.out.println(text + " Svara med siffran 1-" + customers.size());
         for (int i = 0; i < customers.size(); i++) {
             System.out.println(i+1 +". "+ customers.get(i).getSurName() + " " + customers.get(i).getLastName());
         }
-        return inputInt("")-1;
+        if(!test) {
+            return inputInt("") - 1;
+        }
+        else{
+            return testInt;
+        }
     }
 
     public void createNewCustomer(String text,ArrayList<Customer> customers, boolean test, String testString) {
-        String answer, surName,lastName,surNameCap = null,lastNameCap = null, yesNo, testLength;
+        String answer, surName,lastName,surNameCap = null,lastNameCap = null, yesNo = null, testLength;
         long answer2 = 0;
         String[] dataFirst;
 
@@ -150,8 +154,6 @@ public class Tools extends Files {
                 lastNameCap = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
             }
 
-
-
             boolean b = true;
             while(b) {
                 System.out.println("Personnummer?");
@@ -169,10 +171,11 @@ public class Tools extends Files {
                     + "\nEfternamn: " + lastNameCap + "\nDagens Datum: " + today);
 
             System.out.println("\nStämmer detta och vill du lägga till kunde? j/n");
+            if(!test) {
+                yesNo = scan.nextLine();
+            }
 
-            yesNo = scan.nextLine();
-
-            if(Objects.equals(yesNo, "j")) {
+            if(Objects.equals(yesNo, "j") || test) {
                 customers.add(new Customer(answer2, surNameCap, lastNameCap, today, true));
                 addCustomerToFile(customers,filepath);
             }
