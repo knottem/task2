@@ -119,11 +119,27 @@ public class Tools extends Files {
         } while (repeat);
         return false;
     }
-    public int listAllCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
+    public int listAllNonPayingCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
         if(!test) {
             System.out.println(text + " Svara med siffran 1-" + customers.size());
             for (int i = 0; i < customers.size(); i++) {
-                System.out.println(i + 1 + ". " + customers.get(i).getSurName() + " " + customers.get(i).getLastName());
+                if(!customers.get(i).isPayingCustomer()) {
+                    System.out.println(i + 1 + ". " + customers.get(i).getSurName() + " " + customers.get(i).getLastName());
+                }
+            }
+            return inputInt("",false,"") - 1;
+        }
+        else{
+            return testInt - 1;
+        }
+    }
+    public int listAllPayingCustomers(String text, ArrayList<Customer> customers, boolean test, int testInt){
+        if(!test) {
+            System.out.println(text + " Svara med siffran 1-" + customers.size());
+            for (int i = 0; i < customers.size(); i++) {
+                if(customers.get(i).isPayingCustomer()) {
+                    System.out.println(i + 1 + ". " + customers.get(i).getSurName() + " " + customers.get(i).getLastName());
+                }
             }
             return inputInt("",false,"") - 1;
         }
@@ -199,24 +215,22 @@ public class Tools extends Files {
     public int inputInt(String text, boolean test, String testValue){
 
         while(true) {
-            Scanner scan = null;
+            Scanner scan;
             System.out.println(text);
+
             try{
             if(!test){
                 scan = new Scanner(System.in);
                 return scan.nextInt();
             }
             else{
-                scan = new Scanner(testValue);
+                new Scanner(testValue);
                 return Integer.parseInt(testValue);
             }
 
             } catch (InputMismatchException e) {
                 if(!test) {
                     System.out.println("Wrong Type");
-                    if (scan != null) {
-                        scan.next();
-                    }
                 }
                 else{
                     break;
@@ -224,12 +238,15 @@ public class Tools extends Files {
             } catch (NumberFormatException e) {
                 if(!test) {
                     System.out.println("Expected a number");
-                    if(scan != null){
-                       scan.next();
-                    }
-
                 }
                 else{
+                    break;
+                }
+            } catch (IndexOutOfBoundsException e){
+                if(!test){
+                    System.out.println("Too large of a number");
+                }
+                else {
                     break;
                 }
             }

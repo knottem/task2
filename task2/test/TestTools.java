@@ -93,11 +93,10 @@ public class TestTools {
     public void listAllCustomersTest(){
         //Skall alltid returna index platsen på arrayListen, så returnar -1 av det man valde.
         files.addCustomers(customerTest, testFilePath);
-        int i = tools.listAllCustomers("test", customerTest, true, 1);
-        int j = tools.listAllCustomers("test", customerTest, true, 3);
+        int i = tools.listAllPayingCustomers("test", customerTest, true, 1);
+        int j = tools.listAllPayingCustomers("test", customerTest, true, 3);
         assertEquals(i,0);
         assertEquals(j,2);
-
     }
     @Test
     public void createNewCustomerTest(){
@@ -115,6 +114,9 @@ public class TestTools {
         assertEquals(tools.inputInt("",true,"1"), 1);
         assertNotEquals(tools.inputInt("",true,"one"), 1);
         assertEquals(tools.inputInt("",true,"20"), 20);
+
+        //Borde returna noll då den blir IndexOutOfBoundsException
+        assertEquals(tools.inputInt("",true,"1231251251251"), 0);
     }
 
 }

@@ -22,22 +22,50 @@ public class Program extends Tools {
         do {
             boolean startLoop = true;
             while (startLoop) {
-                int answer = inputInt("Vad vill du göra?\n1. Sök efter kund\n2. Lägg till att kund varit och tränat\n3. Lägg till ny betalande kund\n4. Avsluta Programmet", false,"");
+                int answer = inputInt("""
+                        Vad vill du göra?
+                        1. Sök efter kund
+                        2. Lägg till att betalande kund varit och tränat
+                        3. Ändra kund till betalande kund.
+                        4. Lägg till ny betalande kund
+                        5. Avsluta Programmet""", false,"");
                 switch (answer) {
                     case (1) -> {
                         searchCustomer("Vilken kund vill du söka efter? (Personnummer(XXXXXX-XXXX) eller namn)", customers, false,"");
                         startLoop = false;
                     }
                     case (2) -> {
-                        int i = listAllCustomers("Vilken kund vill du lägga till träningstid?", customers, false, 0);
-                        createTrainingTime(customers, i, filepath2);
+                        int i = listAllPayingCustomers("Vilken kund vill du lägga till träningstid?", customers, false, 0);
+                        if(i < customers.size()) {
+                            if (customers.get(i).isPayingCustomer()) {
+                                createTrainingTime(customers, i, filepath2);
+                            } else {
+                                System.out.println("Kunden är ej betalande kund");
+                            }
+                        }else{
+                            System.out.println("För stort nummer");
+                        }
                         startLoop = false;
                     }
                     case(3) -> {
+                        int i = listAllNonPayingCustomers("Vilken kund vill du ändra till betalande kund", customers, false, 0);
+                        if(i < customers.size()) {
+                            if(!customers.get(i).isPayingCustomer()) {
+                                customers.get(i).setPayingCustomer();
+                                customers.get(i).setDate(today);
+                            }else{
+                                System.out.println("Kunden är redan betalande kund");
+                            }
+                        }else {
+                            System.out.println("För stort nummer");
+                        }
+                        startLoop = false;
+                    }
+                    case(4) -> {
                         createNewCustomer("Skapa ny medlem.", customers,filepath,false,"");
                         startLoop = false;
                     }
-                    case(4) -> System.exit(0);
+                    case(5) -> System.exit(0);
 
                     default -> System.out.println("Felaktigt input");
                 }

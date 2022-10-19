@@ -49,10 +49,13 @@ public class Customer {
         return surName;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public void setPayingCustomer() {
         payingCustomer = true;
     }
-
     public String getLastName() {
         return lastName;
     }
