@@ -1,6 +1,6 @@
 Personnummer: 1234567890
 Förnamn: George
 Efternamn: Booth
-Datum för träning: 2022-10-18
-Tid för träning: 16:33:40
+Datum för träning: 2022-10-19
+Tid för träning: 15:20:30
 

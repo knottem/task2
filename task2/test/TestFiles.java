@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestFiles {
 
     String testFilePath = "task2/test/customersTest.txt";
-    String testTrainingpath = "Task2/test/customerTrainingTest.txt";
+    String testTrainingPath = "Task2/test/customerTrainingTest.txt";
     Files files = new Files();
     Tools tools = new Tools();
     ArrayList<Customer> customerTest = new ArrayList<>();
@@ -36,22 +35,23 @@ public class TestFiles {
     @Test
     public void createTrainingTimeTest() {
         customerTest.add(new Customer(1234567890L, "George", "Booth", testDate));
-        customerTest.add(new Customer(8205011234L, "Martin", "Arg", testDate));
-        files.createTrainingTime(customerTest, 0, testTrainingpath);
+        customerTest.add(new Customer(1234567890L, "Martin", "Booth", testDate));
+        files.createTrainingTime(customerTest, 0, testTrainingPath);
 
-        String[] test = new String[5];
-        try (Scanner scan = new Scanner(new File(testTrainingpath))) {
-            for (int i = 0; i < 5; i++) {
-                test[i] = scan.nextLine();
-            }
+        ArrayList<String> test = new ArrayList<>();
+        try (Scanner scan = new Scanner(new File(testTrainingPath))) {
+            while(scan.hasNextLine()) {
+                    test.add(scan.nextLine());
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("Personnummer: 1234567890", test[0]);
-        assertEquals("Förnamn: George", test[1]);
-        assertEquals("Efternamn: Booth", test[2]);
-        assertEquals("Datum för träning: " + LocalDate.now(), test[3]);
-        assertEquals("Tid för träning: " + LocalTime.now().withNano(0), test[4]);
+
+        //Kollar alltid sista tillagda i customerTrainingTest.txt
+        assertEquals("Personnummer: 1234567890", test.get(test.size()-6));
+        assertEquals("Förnamn: George", test.get(test.size()-5));
+        assertEquals("Efternamn: Booth", test.get(test.size()-4));
+        assertEquals("Datum för träning: " + LocalDate.now(), test.get(test.size()-3));
     }
     @Test
     public void addCustomerToFileTest(){

@@ -226,6 +226,12 @@ public class Tools extends Files {
                 } else {
                     break;
                 }
+            }catch (NumberFormatException e) {
+                if (!test) {
+                    System.out.println("Inte nummer");
+                } else {
+                    break;
+                }
             }
 
         }

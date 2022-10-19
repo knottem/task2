@@ -115,7 +115,7 @@ public class TestTools {
         assertNotEquals(tools.inputInt("",true,"one"), 1);
         assertEquals(tools.inputInt("",true,"20"), 20);
 
-        //Borde returna noll då den blir IndexOutOfBoundsException
+        //Borde returna noll då den blir fel
         assertEquals(tools.inputInt("",true,"1231251251251"), 0);
     }
 
