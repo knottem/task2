@@ -51,6 +51,7 @@ public class Program extends Tools {
                         int i = listAllNonPayingCustomers("Vilken kund vill du ändra till betalande kund", customers, false, 0);
                         if(i < customers.size()) {
                             if(!customers.get(i).isPayingCustomer()) {
+                                System.out.println("Kunden: " + customers.get(i).surName + " ändrat till betalande kund");
                                 customers.get(i).setPayingCustomer();
                                 customers.get(i).setDate(today);
                             }else{

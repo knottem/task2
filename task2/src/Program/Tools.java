@@ -205,47 +205,30 @@ public class Tools extends Files {
 
     }
 
-    public int inputInt(String text, boolean test, String testValue){
+    public int inputInt(String text, boolean test, String testValue) {
 
-        while(true) {
+        while (true) {
             Scanner scan;
             System.out.println(text);
 
-            try{
-            if(!test){
-                scan = new Scanner(System.in);
-                return scan.nextInt();
-            }
-            else{
-                new Scanner(testValue);
-                return Integer.parseInt(testValue);
-            }
+            try {
+                if (!test) {
+                    scan = new Scanner(System.in);
+                    return scan.nextInt();
+                } else {
+                    new Scanner(testValue);
+                    return Integer.parseInt(testValue);
+                }
 
             } catch (InputMismatchException e) {
-                if(!test) {
+                if (!test) {
                     System.out.println("Wrong Type");
-                }
-                else{
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                if(!test) {
-                    System.out.println("Expected a number");
-                }
-                else{
-                    break;
-                }
-            } catch (IndexOutOfBoundsException e){
-                if(!test){
-                    System.out.println("Too large of a number");
-                }
-                else {
+                } else {
                     break;
                 }
             }
+
         }
         return 0;
     }
-
-
 }
