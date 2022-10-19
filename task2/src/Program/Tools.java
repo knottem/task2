@@ -16,16 +16,9 @@ public class Tools extends Files {
         return text1.replaceAll("\\s", "");
     }
 
-    public void checkIfMembership(ArrayList<Customer> customers, boolean test, LocalDate date){
-        LocalDate date1;
-        if(test){
-            date1 = date;
-        }
-        else {
-            date1 = today;
-        }
+    public void checkIfMembership(ArrayList<Customer> customers, LocalDate date){
         for (Customer customer : customers) {
-            if (customer.getDate().isAfter(date1.minusYears(1))) {
+            if (customer.getDate().isAfter(date.minusYears(1))) {
                 customer.setPayingCustomer();
             }
         }

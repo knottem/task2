@@ -14,7 +14,7 @@ public class Program extends Tools {
     public void huvudProgram() {
 
         addCustomers(customers, filepath);
-        checkIfMembership(customers,false,null);
+        checkIfMembership(customers,today);
 
         System.out.println("\nVälkommen till Gym-Programmet");
         System.out.println("Dagens Datum: " + today + "\n");

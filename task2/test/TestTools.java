@@ -49,7 +49,7 @@ public class TestTools {
         LocalDate date2 = LocalDate.of(2021,11,18);
         customerTest.add(new Customer(8701012345L,"George", "Booth",date1));
         customerTest.add(new Customer(1234567890L,"Mika", "Dante",date2));
-        tools.checkIfMembership(customerTest,true,testDate);
+        tools.checkIfMembership(customerTest,testDate);
 
         assertFalse(customerTest.get(0).isPayingCustomer());
         assertTrue(customerTest.get(1).isPayingCustomer());

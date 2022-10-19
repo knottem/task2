@@ -35,7 +35,7 @@ public class TestFiles {
     }
     @Test
     public void createTrainingTimeTest() {
-        customerTest.add(new Customer(1234567890, "George", "Booth", testDate));
+        customerTest.add(new Customer(1234567890L, "George", "Booth", testDate));
         customerTest.add(new Customer(8205011234L, "Martin", "Arg", testDate));
         files.createTrainingTime(customerTest, 0, testTrainingpath);
 
@@ -55,11 +55,11 @@ public class TestFiles {
     }
     @Test
     public void addCustomerToFileTest(){
-        customerTest.add(new Customer(1234567890, "George", "Booth", LocalDate.now()));
+        customerTest.add(new Customer(1234567890L, "George", "Booth", LocalDate.now()));
         files.addCustomerToFile(customerTest, testFilePath);
 
         files.addCustomers(customerTest2, testFilePath);
-        tools.checkIfMembership(customerTest2,true,testDate);
+        tools.checkIfMembership(customerTest2,testDate);
         assertEquals(customerTest2.get(customerTest2.size()-1).getSurName(), "George");
         assertEquals(customerTest2.get(customerTest2.size()-1).getLastName(), "Booth");
         assertEquals(customerTest2.get(customerTest2.size()-1).getDate(), LocalDate.now());
