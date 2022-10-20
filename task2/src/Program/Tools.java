@@ -117,7 +117,7 @@ public class Tools extends Files {
             System.out.println(text + " Svara med siffran 1-" + customers.size());
             for (int i = 0; i < customers.size(); i++) {
                 System.out.println(i + 1 + ". " + customers.get(i).getSurName() + " " + customers.get(i).getLastName()
-                        + " --- Medlemskap: " + customers.get(i).getPayingCustomer());
+                        + " --- Medlemskap:" + customers.get(i).getPayingCustomer());
             }
             return inputInt("",false,"") - 1;
         }
