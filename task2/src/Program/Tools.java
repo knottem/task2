@@ -204,7 +204,7 @@ public class Tools extends Files {
                 }
             } catch (InputMismatchException e) {
                 if (!test) {
-                    System.out.println("Wrong Type");
+                    System.out.println("Förväntade mig ett nummer");
                 } else {
                     break;
                 }

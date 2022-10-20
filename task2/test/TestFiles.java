@@ -35,7 +35,7 @@ public class TestFiles {
     @Test
     public void createTrainingTimeTest() {
         customerTest.add(new Customer(1234567890L, "George", "Booth", testDate));
-        customerTest.add(new Customer(1234567890L, "Martin", "Booth", testDate));
+        //customerTest.add(new Customer(1234567890L, "Martin", "Booth", testDate));
         files.createTrainingTime(customerTest, 0, testTrainingPath);
 
         ArrayList<String> test = new ArrayList<>();

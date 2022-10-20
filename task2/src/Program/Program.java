@@ -63,12 +63,13 @@ public class Program extends Tools {
                         startLoop = false;
                     }
                     case(4) -> {
-                        createNewCustomer("Skapa ny medlem.", customers,filepath,false,"");
+                        createNewCustomer("Skapa ny betalande medlem.", customers,filepath,false,"");
+                        customers.get(customers.size()-1).setPayingCustomer();
                         startLoop = false;
                     }
                     case(5) -> System.exit(0);
 
-                    default -> System.out.println("Felaktigt input");
+                    default -> System.out.println("För stort nummer");
                 }
             }
             repeat = repeatProgram("\nKör igen?",false,"");
