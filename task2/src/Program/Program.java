@@ -69,7 +69,7 @@ public class Program extends Tools {
                     }
                     case(5) -> System.exit(0);
 
-                    default -> System.out.println("För stort nummer");
+                    default -> System.out.println("Felaktigt nummer");
                 }
             }
             repeat = repeatProgram("\nKör igen?",false,"");
