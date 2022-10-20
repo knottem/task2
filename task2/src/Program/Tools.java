@@ -73,7 +73,7 @@ public class Tools extends Files {
             String convert2 = convertText(customer.getLastName());
             if (convert.equals(answer2) || convert2.equals(answer2) || convert2.equals(answer3)
                     || answer4 == customer.getSsn() || answer5 == customer.getSsn()) {
-                System.out.println(customer);
+                    System.out.println(customer);
                 b = true;
             }
         }
@@ -140,9 +140,11 @@ public class Tools extends Files {
             } else {
                 scan = new Scanner(testString);
             }
-
-            System.out.println("Namn?");
+            if(!test) {
+                System.out.println("Namn?");
+            }
             answer = scan.nextLine();
+
 
             if (answer.trim().contains(" ")) {
                 dataFirst = answer.split(" ");
@@ -154,7 +156,9 @@ public class Tools extends Files {
 
             boolean b = true;
             while(b) {
-                System.out.println("Personnummer?");
+                if(!test) {
+                    System.out.println("Personnummer?");
+                }
                 testLength = scan.nextLine();
                 if (testLength.length() == 10) {
                     answer2 = Long.parseLong(testLength);
@@ -168,8 +172,8 @@ public class Tools extends Files {
             System.out.println("Personnummer: "+ answer2 + "\nFörnamn: " + surNameCap
                     + "\nEfternamn: " + lastNameCap + "\nDagens Datum: " + today);
 
-            System.out.println("\nStämmer detta och vill du lägga till kunde? j/n");
             if(!test) {
+                System.out.println("\nStämmer detta och vill du lägga till kunde? j/n");
                 yesNo = scan.nextLine();
             }
 
