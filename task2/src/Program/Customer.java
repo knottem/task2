@@ -67,4 +67,7 @@ public class Customer {
     public boolean isPayingCustomer() {
         return payingCustomer;
     }
+    public String getPayingCustomer(){
+        return printPayingCustomer(payingCustomer);
+    }
 }
