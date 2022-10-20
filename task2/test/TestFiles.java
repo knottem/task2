@@ -34,7 +34,7 @@ public class TestFiles {
     }
     @Test
     public void createTrainingTimeTest() {
-        customerTest.add(new Customer(1234567890L, "George", "Booth", testDate));
+        customerTest.add(new Customer(1234567890L, "Martin", "Booth", testDate));
         //customerTest.add(new Customer(1234567890L, "Martin", "Booth", testDate));
         files.createTrainingTime(customerTest, 0, testTrainingPath);
 
@@ -49,7 +49,7 @@ public class TestFiles {
 
         //Kollar alltid sista tillagda i customerTrainingTest.txt
         assertEquals("Personnummer: 1234567890", test.get(test.size()-6));
-        assertEquals("Förnamn: George", test.get(test.size()-5));
+        assertEquals("Förnamn: Martin", test.get(test.size()-5));
         assertEquals("Efternamn: Booth", test.get(test.size()-4));
         assertEquals("Datum för träning: " + LocalDate.now(), test.get(test.size()-3));
     }
